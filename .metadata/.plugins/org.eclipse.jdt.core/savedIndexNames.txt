@@ -1,0 +1,7 @@
+INDEX VERSION 1.134+C:\Furb\2 semestre\Programacao orienteada a objetos\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
+2935710262.index
+2015334353.index
+3121814011.index
+1617660691.index
+1918972591.index

@@ -1,0 +1,20 @@
+package com.example.ExemploEncapsulamento;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+    	ContaBancaria conta = new ContaBancaria();
+    	conta.titular = "Sorezio";
+    	conta.saldo = 300;
+    	
+    	System.out.println("Saldo da conta: "+ conta.saldo);
+    	conta.saldo = 3000000;
+    	System.out.println("Saldo da conta: "+ conta.saldo);
+
+    }
+}

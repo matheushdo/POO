@@ -1,0 +1,7 @@
+package com.example.ExemploEncapsulamento;
+
+public class ContaBancaria {
+	String titular;
+	double saldo;
+
+}

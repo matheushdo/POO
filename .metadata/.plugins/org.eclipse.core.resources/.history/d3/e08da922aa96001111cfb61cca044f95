@@ -1,0 +1,15 @@
+package com.example.ExemploEncapsulamento;
+
+public class ContaBancaria {
+	private String titular;
+	private double saldo;
+	
+	public void setTitular(String titular) {
+		this.titular = titular;
+		
+	}
+	public String getTitular() {
+		return titular;
+	}
+
+}

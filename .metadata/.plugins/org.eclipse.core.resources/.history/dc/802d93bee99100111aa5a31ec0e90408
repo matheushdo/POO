@@ -1,0 +1,6 @@
+package com.example.primeiro;
+
+public class Cachorro {
+	String nome;
+	String raca;
+	}
