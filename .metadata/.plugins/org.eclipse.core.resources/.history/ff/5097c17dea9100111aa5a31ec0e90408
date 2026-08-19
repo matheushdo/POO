@@ -1,6 +1,0 @@
-package com.example.primeiro;
-
-public class Carro {
-	String marca;
-	int kmRodado;
-	}
