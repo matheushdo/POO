@@ -6,6 +6,9 @@ package br.furb.aula.poo.hello_git;
  */
 public class App {
     public static void main( String[] args ) {
+    	System.out.println("Helllo git");
+
+
         
     }
 }
