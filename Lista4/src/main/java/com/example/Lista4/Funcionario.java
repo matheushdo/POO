@@ -70,51 +70,52 @@ public class Funcionario {
 
         FaixaIrpf faixa = identificarFaixaIrpf();
 
-        // 1ª faixa
-        if (faixa == FaixaIrpf.PRIMEIRA) {
-            return 0.0;
-        }
-
         // 2ª faixa
         if (faixa == FaixaIrpf.SEGUNDA) {
 
-            imposto += (salario - FAIXA_1_LIMITE_SUP) * ALIQUOTA_FAIXA_2;
-
-            return arredondar(imposto);
+            imposto += (salario - FAIXA_1_LIMITE_SUP)
+                    * ALIQUOTA_FAIXA_2;
         }
-
-        imposto += (FAIXA_2_LIMITE_SUP - FAIXA_1_LIMITE_SUP)
-                * ALIQUOTA_FAIXA_2;
 
         // 3ª faixa
-        if (faixa == FaixaIrpf.TERCEIRA) {
+        else if (faixa == FaixaIrpf.TERCEIRA) {
 
-            imposto += (salario - FAIXA_2_LIMITE_SUP) * ALIQUOTA_FAIXA_3;
+            imposto += (FAIXA_2_LIMITE_SUP - FAIXA_1_LIMITE_SUP)
+                    * ALIQUOTA_FAIXA_2;
 
-            return arredondar(imposto);
+            imposto += (salario - FAIXA_2_LIMITE_SUP)
+                    * ALIQUOTA_FAIXA_3;
         }
-
-        imposto += (FAIXA_3_LIMITE_SUP - FAIXA_2_LIMITE_SUP)
-                * ALIQUOTA_FAIXA_3;
 
         // 4ª faixa
-        if (faixa == FaixaIrpf.QUARTA) {
+        else if (faixa == FaixaIrpf.QUARTA) {
 
-            imposto += (salario - FAIXA_3_LIMITE_SUP) * ALIQUOTA_FAIXA_4;
+            imposto += (FAIXA_2_LIMITE_SUP - FAIXA_1_LIMITE_SUP)
+                    * ALIQUOTA_FAIXA_2;
 
-            return arredondar(imposto);
+            imposto += (FAIXA_3_LIMITE_SUP - FAIXA_2_LIMITE_SUP)
+                    * ALIQUOTA_FAIXA_3;
+
+            imposto += (salario - FAIXA_3_LIMITE_SUP)
+                    * ALIQUOTA_FAIXA_4;
         }
 
-        imposto += (FAIXA_4_LIMITE_SUP - FAIXA_3_LIMITE_SUP)
-                * ALIQUOTA_FAIXA_4;
-
         // 5ª faixa
-        imposto += (salario - FAIXA_4_LIMITE_SUP) * ALIQUOTA_FAIXA_5;
+        else if (faixa == FaixaIrpf.QUINTA) {
 
-        return arredondar(imposto);
-    }
+            imposto += (FAIXA_2_LIMITE_SUP - FAIXA_1_LIMITE_SUP)
+                    * ALIQUOTA_FAIXA_2;
 
-    private double arredondar(double valor) {
-        return Math.round(valor * 100.0) / 100.0;
+            imposto += (FAIXA_3_LIMITE_SUP - FAIXA_2_LIMITE_SUP)
+                    * ALIQUOTA_FAIXA_3;
+
+            imposto += (FAIXA_4_LIMITE_SUP - FAIXA_3_LIMITE_SUP)
+                    * ALIQUOTA_FAIXA_4;
+
+            imposto += (salario - FAIXA_4_LIMITE_SUP)
+                    * ALIQUOTA_FAIXA_5;
+        }
+
+        return Math.round(imposto * 100.0) / 100.0;
     }
 }

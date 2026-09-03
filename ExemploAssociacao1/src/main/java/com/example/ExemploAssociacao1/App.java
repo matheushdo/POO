@@ -6,6 +6,6 @@ public class App
     public static void main( String[] args )
     {
         Pessoa p = new Pessoa("Gerson");
-        Veiculo v = new Veiculo("Cara chata", "Mercedes") 
+        Veiculo v = new Veiculo("Cara chata", "Mercedes");
     }
 }
