@@ -2,6 +2,20 @@ package com.example.Lista4;
 
 public class Funcionario {
 
+    private static final double FAIXA_1_LIMITE_SUP = 1903.98;
+    private static final double FAIXA_2_LIMITE_INF = 1903.99;
+    private static final double FAIXA_2_LIMITE_SUP = 2826.65;
+    private static final double FAIXA_3_LIMITE_INF = 2826.66;
+    private static final double FAIXA_3_LIMITE_SUP = 3751.05;
+    private static final double FAIXA_4_LIMITE_INF = 3751.06;
+    private static final double FAIXA_4_LIMITE_SUP = 4664.68;
+    private static final double FAIXA_5_LIMITE_INF = 4664.69;
+
+    private static final double ALIQUOTA_FAIXA_2 = 0.075;
+    private static final double ALIQUOTA_FAIXA_3 = 0.15;
+    private static final double ALIQUOTA_FAIXA_4 = 0.225;
+    private static final double ALIQUOTA_FAIXA_5 = 0.275;
+
     private String nome;
     private double salario;
 
@@ -23,61 +37,80 @@ public class Funcionario {
     }
 
     public void setSalario(double salario) {
+
         if (salario <= 0) {
             throw new IllegalArgumentException("Salário deve ser maior que Zero");
         }
+
         this.salario = salario;
     }
 
     public FaixaIrpf identificarFaixaIrpf() {
-        if (salario <= 1903.98) {
+
+        if (salario <= FAIXA_1_LIMITE_SUP) {
             return FaixaIrpf.PRIMEIRA;
-        } else if (salario <= 2826.65) {
+
+        } else if (salario <= FAIXA_2_LIMITE_SUP) {
             return FaixaIrpf.SEGUNDA;
-        } else if (salario <= 3751.05) {
+
+        } else if (salario <= FAIXA_3_LIMITE_SUP) {
             return FaixaIrpf.TERCEIRA;
-        } else if (salario <= 4664.68) {
+
+        } else if (salario <= FAIXA_4_LIMITE_SUP) {
             return FaixaIrpf.QUARTA;
+
         } else {
             return FaixaIrpf.QUINTA;
         }
     }
 
     public double calcularIrpf() {
+
         double imposto = 0.0;
+
         FaixaIrpf faixa = identificarFaixaIrpf();
 
+        // 1ª faixa
         if (faixa == FaixaIrpf.PRIMEIRA) {
             return 0.0;
         }
 
         // 2ª faixa
-        double limiteFaixa1 = 1903.98;
-        double limiteFaixa2 = 2826.65;
         if (faixa == FaixaIrpf.SEGUNDA) {
-            imposto += (salario - limiteFaixa1) * 0.075;
+
+            imposto += (salario - FAIXA_1_LIMITE_SUP) * ALIQUOTA_FAIXA_2;
+
             return arredondar(imposto);
         }
-        imposto += (limiteFaixa2 - limiteFaixa1) * 0.075;
+
+        imposto += (FAIXA_2_LIMITE_SUP - FAIXA_1_LIMITE_SUP)
+                * ALIQUOTA_FAIXA_2;
 
         // 3ª faixa
-        double limiteFaixa3 = 3751.05;
         if (faixa == FaixaIrpf.TERCEIRA) {
-            imposto += (salario - limiteFaixa2) * 0.15;
+
+            imposto += (salario - FAIXA_2_LIMITE_SUP) * ALIQUOTA_FAIXA_3;
+
             return arredondar(imposto);
         }
-        imposto += (limiteFaixa3 - limiteFaixa2) * 0.15;
+
+        imposto += (FAIXA_3_LIMITE_SUP - FAIXA_2_LIMITE_SUP)
+                * ALIQUOTA_FAIXA_3;
 
         // 4ª faixa
-        double limiteFaixa4 = 4664.68;
         if (faixa == FaixaIrpf.QUARTA) {
-            imposto += (salario - limiteFaixa3) * 0.225;
+
+            imposto += (salario - FAIXA_3_LIMITE_SUP) * ALIQUOTA_FAIXA_4;
+
             return arredondar(imposto);
         }
-        imposto += (limiteFaixa4 - limiteFaixa3) * 0.225;
+
+        imposto += (FAIXA_4_LIMITE_SUP - FAIXA_3_LIMITE_SUP)
+                * ALIQUOTA_FAIXA_4;
 
         // 5ª faixa
-        imposto += (salario - limiteFaixa4) * 0.275;
+        imposto += (salario - FAIXA_4_LIMITE_SUP) * ALIQUOTA_FAIXA_5;
+
         return arredondar(imposto);
     }
 
